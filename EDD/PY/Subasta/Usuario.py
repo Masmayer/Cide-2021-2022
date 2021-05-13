@@ -1,4 +1,5 @@
 class Usuario:
+
     # Constructor
 
     def __init__(self, nombreUsuario, credito):
@@ -25,4 +26,4 @@ class Usuario:
     # Metodo to String
 
     def __str__(self):
-        return "Nombre +" + self.getNombreusuario().getNombre() + " Cantidad pujada: " + str(self.getCredito())
+        return "Nombre " + self.getNombreusuario() + " Cantidad pujada: " + str(self.getCredito())
