@@ -14,6 +14,8 @@ class Test:
     print(s1.info_puja_mayor())
     print(s1.get_historial())
     print(s1.info_puja_mayor())
+    print(s1.get_historial())
+    print(s1.info_puja_mayor())
     print(s1.finalizar_subasta())
     print(s1.puja_con_cantidad(u3, 200))
     s2 = Subasta("Impresora 3D", u2)
