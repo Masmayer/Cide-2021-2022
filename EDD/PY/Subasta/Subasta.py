@@ -13,66 +13,108 @@ class Subasta:
     # Getters & Setters
 
     def info_puja_mayor(self):
-        return "-----------------------------------------------\nInformacion del usuario que ostenta la mayor puja:\n Nombre: "+self.__pujas[-1].getUsuario().getNombreusuario() \
-               + "\n Cantidad pujada: " + str(self.__pujas[-1].getCantidad_dinero())
-    def getPujamayor(self):
+        return "-----------------------------------------------\nInformacion del usuario que ostenta la mayor puja:\n Nombre: " + \
+               self.__pujas[-1].get_usuario().getNombreusuario() \
+               + "\n Cantidad pujada: " + str(
+            self.__pujas[-1].get_cantidad_dinero())
+
+    def get_puja_mayor(self):
         return self.__pujas[-1]
 
-    def getNombreproducto(self):
+    def get_nombre_producto(self):
         return self.__nombre_producto
 
-    def setNombreproducto(self, nombre):
+    def set_nombre_producto(self, nombre):
         self.__nombre_producto = nombre
 
-    def getEstadosubasta(self):
+    def get_estado_subasta(self):
         return self.__estado_subasta
 
-    def setEstadosubasta(self, estado):
+    def set_estado_subasta(self, estado):
         self.__estado_subasta = estado
 
-    def getUsuariopropietario(self):
+    def get_usuario_propietario(self):
         return self.__usuario_propietario
 
-    def setUsuariopropietario(self, usuarioP):
+    def set_usuario_propietario(self, usuarioP):
         self.__usuario_propietario = usuarioP
 
-    def Historial(self):
+    def historial(self):
         for puja in self.__pujas[1::]:
             yield puja.__str__()
-    def getHistorial(self):
-        for historial in self.Historial():
-            return "-----------------------------------------------\nHistorial de la subasta del producto: "+self.getNombreproducto()+"\n"+historial
 
-    def setPujas(self, Puja):
+    def get_historial(self):
+
+        message ="Historial--------------------------------------------------------"
+        for historial in self.historial():
+             message += historial
+        return message
+    def set_pujas(self, Puja):
         self.__pujas.append(Puja)
+
+    def esta_abierta(self):
+        if self.get_estado_subasta():
+            return "La subasta está abierta."
+        else:
+            return "La subasta está cerrada."
+
+    def dinero_en_cartera(self, Usuario, dinero_a_pujar):
+        if (Usuario.get_credito() >= dinero_a_pujar):
+            return "OK, dinero suficiente"
+        else:
+            return "Dinero en cartera suficiente"
+
+    def eres_propietario(self, Usuario):
+        if Usuario != self.get_usuario_propietario():
+            return "Cliente confirmado, puedes continuar..."
+        else:
+            return "El usuario no puede subir la puja mayor."
+
+    def dinero_mayor_que_puja_mayor(self, dinero):
+        if dinero > self.get_puja_mayor().get_cantidad_dinero():
+            return "Confirmado, dinero suficiente para superar la puja mayor."
+
+    def dinero_sufi_para_puja_automatica(self, Usuario):
+        if Usuario.get_credito() > self.get_puja_mayor().get_cantidad_dinero():
+            return "Dinero para puja de 1 euro suficiente."
+        else:
+            return "Dinero insuficiente para puja de 1 euro"
 
     # Funcionalitats
 
-    def pujar(self, Usuario, cantidad_pujada):
-        if (self.getEstadosubasta() and Usuario.getCredito() >= cantidad_pujada
-                and Usuario != self.getUsuariopropietario() and cantidad_pujada > self.getPujamayor().getCantidad_dinero() ):
-            self.setPujas(Puja(Usuario, cantidad_pujada))
-            return True and "-----------------------------------------------\nPuja hecha por "+Usuario.getNombreusuario() +" aceptada"
+    def puja_con_cantidad(self, Usuario, cantidad_pujada):
+        if (self.esta_abierta() and self.dinero_en_cartera(Usuario,cantidad_pujada)
+                and self.eres_propietario(
+                    Usuario) and self.dinero_mayor_que_puja_mayor()):
+
+            self.set_pujas(Puja(Usuario, cantidad_pujada))
+            return True and "-----------------------------------------------\nPuja hecha por " + \
+                   Usuario.get_nombre_usuario() + " aceptada"
         else:
             return "-----------------------------------------------\nPuja no aceptada, introduzca una mayor cantidad."
 
-    def pujaAutomatica(self, Usuario):
-        if (self.getEstadosubasta() == True and Usuario.getCredito() > self.getPujamayor().getCantidad_dinero()
-                and Usuario != self.getUsuariopropietario()):
-            if(self.getPujamayor() is None):
-                self.setPujas(Puja(Usuario,1))
+    def puja_automatica(self, Usuario):
+        if self.esta_abierta() and self.dinero_sufi_para_puja_automatica(
+                Usuario) and self.eres_propietario(Usuario):
+            if self.get_puja_mayor() is None:
+                self.set_pujas(Puja(Usuario, 1))
             else:
-                nuevaPuja = self.getPujamayor().getCantidad_dinero()+1
-                self.setPujas(Puja(Usuario, nuevaPuja))
-            return "-----------------------------------------------\nPuja automatica hecha por " + Usuario.getNombreusuario() + " aceptada\n-----------------------------------------------"
+                nueva_puja = self.get_puja_mayor().get_cantidad_dinero() + 1
+                self.set_pujas(Puja(Usuario, nueva_puja))
+            return "-----------------------------------------------\nPuja automatica hecha por " + \
+                   Usuario.get_nombre_usuario() + " aceptada\n-----------------------------------------------"
         else:
-            return "-----------------------------------------------\nPuja no aceptada, no tiene la cantidad necesaria de dinero.."
-    def finalizar_subasta(self):
-        if self.getEstadosubasta():
+            return "-----------------------------------------------\nPuja no aceptada, no tiene la cantidad necesaria "\
+                   "de dinero.. "
 
-            self.getUsuariopropietario().incrementarCredito(self.getPujamayor().getCantidad_dinero())
-            self.getPujamayor().getUsuario().decrementarCredito(self.getPujamayor().getCantidad_dinero())
-            self.setEstadosubasta(False)
+    def finalizar_subasta(self):
+        if self.esta_abierta():
+
+            self.get_usuario_propietario().incrementarCredito(
+                self.get_puja_mayor().get_cantidad_dinero())
+            self.get_puja_mayor().get_usuario().decrementar_credito(
+                self.get_puja_mayor().get_cantidad_dinero())
+            self.set_estado_subasta(False)
             return "Subasta finalizada correctamente."
         else:
             return "La subasta ya ha sido cerrada."

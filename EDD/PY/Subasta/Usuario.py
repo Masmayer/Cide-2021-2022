@@ -7,19 +7,19 @@ class Usuario:
         self.Credito = credito
 
     # Getters & Setters
-    def getNombreusuario(self):
+    def get_nombre_usuario(self):
         return self.__nombreUsuario
 
-    def setCredito(self, int):
+    def set_credito(self, int):
         self.Credito = int
 
-    def getCredito(self):
+    def get_credito(self):
         return self.Credito
 
-    def incrementarCredito(self, suma):
+    def incrementar_credito(self, suma):
         self.Credito= self.getCredito() + suma
 
-    def decrementarCredito(self, resta):
+    def decrementar_credito(self, resta):
         self.Credito = self.getCredito() - resta
 
 

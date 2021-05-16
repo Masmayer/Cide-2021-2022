@@ -10,14 +10,15 @@ class Puja:
 
     # Getters & Setters
 
-   def getUsuario(self):
+   def get_usuario(self):
        return self.Usuario
 
-   def getCantidad_dinero(self):
+   def get_cantidad_dinero(self):
        return self.cDinero
 
    def  __str__(self):
         return "\n-----------------------------------------------\n" \
                "Informacion del pujador:" \
-               "\nNombre: " + self.getUsuario().getNombreusuario() + \
-               "\nCantidad pujada: " + str(self.getCantidad_dinero())+"\n-----------------------------------------------"
+               "\nNombre: " + self.get_usuario().get_nombre_usuario() + \
+               "\nCantidad pujada: " + str(self.get_cantidad_dinero())+"\n-----------------------------------------------"
+
