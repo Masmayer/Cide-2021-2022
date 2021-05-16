@@ -14,7 +14,7 @@ class Subasta:
 
     def info_puja_mayor(self):
         return "-----------------------------------------------\nInformacion del usuario que ostenta la mayor puja:\n Nombre: " + \
-               self.__pujas[-1].get_usuario().getNombreusuario() \
+               self.__pujas[-1].get_usuario().get_nombre_usuario() \
                + "\n Cantidad pujada: " + str(
             self.__pujas[-1].get_cantidad_dinero())
 
