@@ -17,13 +17,13 @@ class Usuario:
         return self.Credito
 
     def incrementar_credito(self, suma):
-        self.Credito= self.getCredito() + suma
+        self.Credito= self.get_credito() + suma
 
     def decrementar_credito(self, resta):
-        self.Credito = self.getCredito() - resta
+        self.Credito = self.get_credito() - resta
 
 
     # Metodo to String
 
     def __str__(self):
-        return "Nombre " + self.getNombreusuario() + " Cantidad pujada: " + str(self.getCredito())
+        return "Nombre " + self.get_nombre_usuario() + " Cantidad pujada: " + str(self.get_credito())

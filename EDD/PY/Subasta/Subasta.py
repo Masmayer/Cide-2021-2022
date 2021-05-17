@@ -45,7 +45,8 @@ class Subasta:
 
     def get_historial(self):
 
-        message ="Historial--------------------------------------------------------"
+        message ="-----------------------------------------------\nHistorial de pujadores del objeto " + \
+                 self.get_nombre_producto()
         for historial in self.historial():
              message += historial
         return message
@@ -84,8 +85,7 @@ class Subasta:
 
     def puja_con_cantidad(self, Usuario, cantidad_pujada):
         if (self.esta_abierta() and self.dinero_en_cartera(Usuario,cantidad_pujada)
-                and self.eres_propietario(
-                    Usuario) and self.dinero_mayor_que_puja_mayor()):
+                and self.eres_propietario(Usuario) and self.dinero_mayor_que_puja_mayor(cantidad_pujada)):
 
             self.set_pujas(Puja(Usuario, cantidad_pujada))
             return True and "-----------------------------------------------\nPuja hecha por " + \
@@ -110,11 +110,9 @@ class Subasta:
     def finalizar_subasta(self):
         if self.esta_abierta():
 
-            self.get_usuario_propietario().incrementarCredito(
-                self.get_puja_mayor().get_cantidad_dinero())
-            self.get_puja_mayor().get_usuario().decrementar_credito(
-                self.get_puja_mayor().get_cantidad_dinero())
+            self.get_usuario_propietario().incrementar_credito(self.get_puja_mayor().get_cantidad_dinero())
+            self.get_puja_mayor().get_usuario().decrementar_credito(self.get_puja_mayor().get_cantidad_dinero())
             self.set_estado_subasta(False)
-            return "Subasta finalizada correctamente."
+            return "-----------------------------------------------\nSubasta finalizada correctamente."
         else:
-            return "La subasta ya ha sido cerrada."
+            return "-----------------------------------------------\nLa subasta ya ha sido cerrada."
