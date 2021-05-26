@@ -1,7 +1,4 @@
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 import java.util.zip.InflaterOutputStream;
 
@@ -16,21 +13,10 @@ public class Pesca {
 
 
 
-    private void altaUsuario(){
-        System.out.println("Indique Nombre de Usuario: ");
-        Scanner sc = new Scanner(System.in);
-        String usuario = sc.nextLine();
-        try {
-            FileWriter fw = new FileWriter("src\\archivos\\usuarios.txt", true);
-            if (!comprobarUsuario(usuario)){
-                fw.write("#" + usuario + "#\n");
-                fw.close();
-            }else{
-                throw new Exception("L'Usuari ja està registrat!");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    private void altaUsuario() throws IOException {
+
+            FileReader fr= new FileReader("src/usuaris");
+            int leedor = fr.read();
     }
 
 
@@ -42,33 +28,36 @@ public class Pesca {
         FileReader fr=new FileReader("src/usuaris");
         int leedor = fr.read();
 
-        // Inicializamos el booleano que utilizaremos para ver si está el separador, en este caso el '#'
+        /**
+         * Inicializamos el booleano que utilizaremos para ver si está el separador, en este caso el '#' y
+         * 1    11111321el booleano para ver si se ha encontrado el usuario.
+         */
         boolean estaSeparado = true;
+        boolean estaAqui = false;
+        int contadorHash = 0;
+        int contadorLinea = 0;
+        while (leedor!=-1 ){
+            while (leedor!='\n' || leedor!='\r'){
+                while(estaSeparado){
+                    if(leedor!='#'){
+                        conversor = conversor + (char)leedor;
 
-        while (leedor!=-1){
-            while (leedor!="\n"){
-                while (estaSeparado){
-                    if (leedor == '#')
-                    conversor += (char)leedor;
-
-
+                    }else {
+                        if (conversor.equals(usuario)){
+                            return true;
+                        }
+                        estaSeparado = false;
+                        contadorHash++
+                    }
+                    leedor = fr.read();
                 }
-
+                contadorLinea++;
+                estaSeparado = true;
+                conversor="";
             }
-            while(estaSeparado){
-                if(leedor!='#' && leedor!='\n'){
-                    conversor = conversor + (char)leedor;
-
-                }else {
-                    estaSeparado = false;
-                }
-                leedor = fr.read();
-            }
-            estaSeparado = true;
-            conversor="";
         }
-        fr.close();
-        return false;
+            fr.close();
+            return false;
     }
 
     public void read() throws IOException {
