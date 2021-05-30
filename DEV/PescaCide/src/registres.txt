@@ -1,3 +1,14 @@
-#Serra#juanma#0.1596646#
-#Aranya de cap negre#juanma#2.138591#
-#Serra#juanma#0.21939856#
+#Cap Roig#juanma#3.7600713#
+#Bouquinete#juanma#0.97705215#
+#Doncella#po#0.23125692#
+#Doncella#pepito#0.22419363#
+#Vaca#po#0.30106482#
+#Pegell#pomares#3.061374#
+#Doncella#pomares#0.2739292#
+#Mero rojo#pomares#1.7165846#
+#Koran#pomares#2.9552782#
+#Serra#joshua#0.33906254#
+#Serra#joshua#0.36405793#
+#Pegell#joshua#1.6329339#
+#Vaca#joshua#0.16700953#
+#Pejesapo#joshua#0.28811786#
