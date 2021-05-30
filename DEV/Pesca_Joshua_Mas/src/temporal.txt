@@ -1,0 +1,11 @@
+#Cap Roig#juanma#3.7600713#
+#Bouquinete#juanma#0.97705215#
+#Vaca#po#0.30106482#
+#Pegell#pomares#3.061374#
+#Doncella#pomares#0.2739292#
+#Koran#pomares#2.9552782#
+#Serra#joshua#0.36405793#
+#Pejesapo#joshua#0.28811786#
+#Pargo criollo#po#1.1231666#
+#Mero rojo#po#12.789954#
+#Cofre cornudo#po#0.15614381#

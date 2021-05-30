@@ -106,6 +106,8 @@ public class Pesca {
                     FileOutputStream escritor = new FileOutputStream("src/temporal.txt", true);
                     escritor.write(lineadeRegistros.getBytes());
                     escritor.close();
+                    lineadeRegistros = "";
+
                 }
                 }
                 campo1="";
@@ -114,6 +116,7 @@ public class Pesca {
             }
         }
         lector.close();
+
     }
     public void estadisticas() throws IOException {
         File temporal = new File("src/temporal.txt");
@@ -171,6 +174,7 @@ public class Pesca {
                     FileOutputStream escritor = new FileOutputStream("src/temporal.txt", true);
                     escritor.write(lineadeRegistros.getBytes());
                     escritor.close();
+                    lineadeRegistros = "";
                 }
                 campo1="";
                 campo2="";
@@ -378,6 +382,7 @@ public class Pesca {
         }
         lector.close();
         reemplazarTemporal("src/temporal2.txt", "src/temporal.txt");
+        lineadeRegistros="";
 
     }
     public void reemplazarTemporal(String temporal1, String temporal2) throws IOException {
@@ -598,20 +603,18 @@ public class Pesca {
                         System.out.println("Que usuario quieres añadir?");
                         String usuarioNuevo = sc.nextLine();
                         this.añadirUsuario(usuarioNuevo);
-                        this.menu();
+                        break;
                     case "2":
                         System.out.println("Que usuario quieres eliminar?");
                         String usuarioEliminar = sc.nextLine();
                         this.borrarUsuario(usuarioEliminar);
                         System.out.println("Borrado satisfactoriamente!");
-                        this.menu();
                         break;
                     case "3":
                         System.out.println("Con que usuario quiere pescar? ");
                         String usuarioaPescar = sc.nextLine();
                         this.comprobarUsuarioParaPescar(usuarioaPescar);
                         this.seleccionarPesquera(usuarioaPescar);
-                        this.menu();
                         break;
                     case "4":
                         System.out.println("De que usuario deseas ver las estadisticas? ");
@@ -623,7 +626,6 @@ public class Pesca {
                                     "\n------------------------------------------------------------");
                             this.mostrarEstadisticas();
                         }else throw new Exception("Usuario no encontrado.");
-                        this.menu();
                         break;
                     case "5":
                         this.estadisticas();
@@ -631,7 +633,6 @@ public class Pesca {
                                 +"ESTADISTICAS DE PESO MÁXIMAS GLOBALES "+
                                 "\n------------------------------------------------------------");
                         this.mostrarEstadisticas();
-                        this.menu();
                         break;
                     case "s":
                         System.out.println("Finalizando el programa de pesca.");
@@ -647,7 +648,6 @@ public class Pesca {
     }
     private void seleccionarPesquera(String usuario) {
         try {
-            boolean salir2=false;
             Scanner sc = new Scanner(System.in);
                 System.out.println("**************************************************");
                 System.out.println("* En que mar quieres pescar?                     *");
