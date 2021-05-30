@@ -1,0 +1,10 @@
+#Esturion siberiano#0.025#1.5#25.0#
+#Alburno binaculado#0.05#1.1#12.5#
+#Thor#0.10#0.75#4.8#
+#Lofot#0.15#0.25#2.500#
+#Loro#0.20#0.150#1.500#
+#Koran#0.25#1.50#3.200#
+#Lima narigudo#0.40#0.13#0.45#
+#Pejesapo#0.60#0.12#0.4#
+#Cofre cornudo#0.80#0.12#0.33#
+#Tofol#1.1#0.2#0.4#
