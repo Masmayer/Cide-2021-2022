@@ -5,7 +5,7 @@ from Puja import Puja
 class Subasta:
     #print(prueba commit)
     # Constructor
-    print("HOLA2")
+    print("HOLA2333")
     def __init__(self, nombre_producto, Usuario):
         self.__nombre_producto = nombre_producto
         self.__usuario_propietario = Usuario
